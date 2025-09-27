@@ -1,0 +1,16 @@
+{
+  "sadhakaDTO": {
+    "username": "krishna_das_123",
+    "firstName": "Krishna",
+    "lastName": "Das",
+    "email": "krishna.das@example.com",
+    "phoneNumber": "+91-9876543210",
+    "spiritualName": "Krishna Das",
+    "temple": "ISKCON Vrindavan",
+    "initiationLevel": "First Initiation",
+    "location": "Vrindavan, Uttar Pradesh, India",
+    "role": "SADHAKA",
+    "active": true
+  },
+  "password": "HareKrishna@123"
+}

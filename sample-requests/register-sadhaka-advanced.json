@@ -1,0 +1,16 @@
+{
+  "sadhakaDTO": {
+    "username": "radha_priya",
+    "firstName": "Radha",
+    "lastName": "Priya",
+    "email": "radha.priya@iskcon.org",
+    "phoneNumber": "+1-555-123-4567",
+    "spiritualName": "Radha Priya Devi Dasi",
+    "temple": "ISKCON New York",
+    "initiationLevel": "Second Initiation",
+    "location": "New York, USA",
+    "role": "SADHAKA",
+    "active": true
+  },
+  "password": "RadheRadhe@456"
+}

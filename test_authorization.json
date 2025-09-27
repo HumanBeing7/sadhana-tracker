@@ -1,0 +1,17 @@
+{
+  "test_name": "Sadhana Report Submission Test",
+  "description": "Test to verify that SADHAKA role can submit daily sadhana reports",
+  "endpoint": "POST /api/sadhaka/sadhana",
+  "expected_result": "Success (200 OK) with valid JWT token for SADHAKA role",
+  "test_data": {
+    "date": "2025-01-15",
+    "chantingRounds": 16,
+    "chantingQuality": "EXCELLENT",
+    "readingTime": 45,
+    "serviceHours": 2.5,
+    "notes": "Felt very peaceful during japa. Good concentration today."
+  },
+  "auth_headers": {
+    "Authorization": "Bearer <JWT_TOKEN_FROM_LOGIN>"
+  }
+}

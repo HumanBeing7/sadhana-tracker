@@ -1,0 +1,16 @@
+{
+  "sadhakaDTO": {
+    "username": "new_devotee",
+    "firstName": "Govind",
+    "lastName": "Kumar",
+    "email": "govind.kumar@gmail.com",
+    "phoneNumber": "+91-8765432109",
+    "spiritualName": "Govind Das",
+    "temple": "ISKCON Mayapur",
+    "initiationLevel": "Aspiring Devotee",
+    "location": "Mayapur, West Bengal, India",
+    "role": "SADHAKA",
+    "active": true
+  },
+  "password": "JaiShriKrishna@789"
+}
