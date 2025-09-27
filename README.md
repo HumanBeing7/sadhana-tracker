@@ -1,90 +1,137 @@
-# Sadhaka Registration API - Sample JSON Files
+# Sadhana Tracker
 
-## 📋 **Registration Endpoint**
-- **URL:** `POST /api/auth/register`
-- **Content-Type:** `application/json`
-- **Authentication:** Not required (public endpoint)
+A Spring Boot + MySQL application for managing Sadhaka (devotee) registrations, mentor assignments, and ISKCON community data.
 
-## 📁 **Sample JSON Files**
+---
 
-### 1. **register-sadhaka.json** - Basic Registration
-Standard registration for a first-initiated devotee from ISKCON Vrindavan.
+## 🚀 Features
 
-### 2. **register-sadhaka-advanced.json** - Advanced Devotee
-Registration for a second-initiated devotee from ISKCON New York with spiritual name.
+- Register Sadhakas, Mentors, and Admins via REST API
+- Secure authentication and role-based access (JWT)
+- Assign Sadhakas to Mentors (admin or mentor self-assignment)
+- View, manage, and unassign assignments
+- Sample JSON requests for quick testing
+- Dockerized MySQL for easy local development
 
-### 3. **register-sadhaka-beginner.json** - Beginner Devotee
-Registration for an aspiring devotee from ISKCON Mayapur.
+---
 
-## 🔐 **Required Fields**
+## 🏁 Quick Start
 
-### **SadhakaDTO Fields:**
-- `username` (string) - Unique username for login
-- `firstName` (string) - First name
-- `lastName` (string) - Last name  
-- `email` (string) - Email address (must be unique)
-- `phoneNumber` (string) - Contact number
-- `spiritualName` (string) - Spiritual/initiated name
-- `temple` (string) - Home temple/center
-- `initiationLevel` (string) - Spiritual initiation level
-- `location` (string) - Current location
-- `role` (string) - Must be "SADHAKA" for devotees
-- `active` (boolean) - Account status (true/false)
+### 1. Clone the Repository
 
-### **Additional Fields:**
-- `password` (string) - Account password (will be encrypted)
+```bash
+git clone https://github.com/HumanBeing7/sadhana-tracker.git
+cd sadhana-tracker
+```
 
-## 📝 **Initiation Levels**
-- "Aspiring Devotee" - Not yet initiated
-- "First Initiation" - Received first diksha
-- "Second Initiation" - Received second diksha  
-- "Sannyasi" - Renounced order
+### 2. Start MySQL with Docker
 
-## 🏛️ **Common ISKCON Temples**
-- ISKCON Vrindavan
-- ISKCON Mayapur  
-- ISKCON Mumbai
-- ISKCON Delhi
-- ISKCON Bangalore
-- ISKCON New York
-- ISKCON Los Angeles
-- ISKCON London
+```powershell
+docker-compose up -d mysql
+```
 
-## 🌍 **Testing with cURL**
+### 3. Run the Spring Boot Application
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+---
+
+## 🗄️ Database Setup
+
+- MySQL runs in Docker (`sadhana-mysql`)
+- Database: `sadhana_tracker_db`
+- Root password: `password`
+- Data persists in Docker volume
+
+See [`DATABASE_SETUP.md`](./DATABASE_SETUP.md) for full details and maintenance commands.
+
+---
+
+## 📝 API Endpoints
+
+### Sadhaka Registration
+
+- **POST** `/api/auth/register`
+- See sample JSON files in [`sample-requests/`](./sample-requests):
+
+  - [`register-sadhaka.json`](./sample-requests/register-sadhaka.json): Basic registration
+  - [`register-sadhaka-advanced.json`](./sample-requests/register-sadhaka-advanced.json): Advanced devotee
+  - [`register-sadhaka-beginner.json`](./sample-requests/register-sadhaka-beginner.json): Beginner devotee
+
+### Mentor Registration
+
+- **POST** `/api/auth/register/mentor`
+- See [`MENTOR_REGISTRATION_GUIDE.md`](./MENTOR_REGISTRATION_GUIDE.md) for details
+
+### Admin Registration
+
+- **POST** `/api/auth/register/admin`
+- See [`ADMIN_REGISTRATION_GUIDE.md`](./ADMIN_REGISTRATION_GUIDE.md) for details
+
+### Authentication
+
+- **POST** `/api/auth/login` (for all roles)
+
+### Assignment Management
+
+- **POST** `/api/admin/assign-sadhaka` (admin assigns sadhaka to mentor)
+- **POST** `/api/mentor/sadhakas/{sadhakaId}/assign` (mentor self-assigns)
+- **DELETE** `/api/admin/remove-assignment` (admin removes assignment)
+- **GET** `/api/admin/assignments` (view all assignments)
+
+See [`ASSIGNMENT_GUIDE.md`](./ASSIGNMENT_GUIDE.md) and [`ASSIGNMENT_FIX_SUMMARY.md`](./ASSIGNMENT_FIX_SUMMARY.md) for assignment details and fixes.
+
+---
+
+## 🧪 Testing the API
+
+### With cURL
 
 ```bash
 curl -X POST http://localhost:8080/api/auth/register \
   -H "Content-Type: application/json" \
-  -d @register-sadhaka.json
+  -d @sample-requests/register-sadhaka.json
 ```
 
-## 📱 **Testing with Postman**
-1. Set method to `POST`
-2. URL: `http://localhost:8080/api/auth/register`
-3. Headers: `Content-Type: application/json`
-4. Body: Copy content from any sample JSON file
+### With Postman
 
-## ✅ **Expected Success Response**
-```json
-{
-  "message": "Registration successful",
-  "data": {
-    "id": 1,
-    "username": "krishna_das_123",
-    "firstName": "Krishna",
-    "lastName": "Das",
-    "email": "krishna.das@example.com",
-    "spiritualName": "Krishna Das",
-    "temple": "ISKCON Vrindavan",
-    "role": "SADHAKA",
-    "active": true
-  }
-}
-```
-
-## ❌ **Common Error Responses**
-- **400 Bad Request:** Validation errors, duplicate username/email
-- **500 Internal Server Error:** Database connection issues
+1. Import sample JSON from `sample-requests/`
+2. Set endpoint and headers as described above
 
 ---
-**🙏 Hare Krishna! May your registration be successful in serving the Lord! 🙏**
+
+## 📂 Project Structure
+
+- `src/main/java/com/iskon/sadhana/tracker/sadhana_tracker/` — Main application code
+- `src/test/java/com/iskon/sadhana/tracker/sadhana_tracker/` — Tests
+- `sample-requests/` — Sample JSON files for API testing
+- `DATABASE_SETUP.md` — MySQL/Docker setup guide
+- `ADMIN_REGISTRATION_GUIDE.md`, `MENTOR_REGISTRATION_GUIDE.md` — Role registration guides
+- `ASSIGNMENT_GUIDE.md`, `ASSIGNMENT_FIX_SUMMARY.md`, `MENTOR_CONTROLLER_FIX.md` — Assignment and controller documentation
+
+---
+
+## 🛡️ Security
+
+- Passwords are encrypted
+- JWT-based authentication
+- Role-based access control (Admin, Mentor, Sadhaka)
+- See security notes in the registration guides
+
+---
+
+## 🙏 Credits
+
+Developed for ISKCON community management and mentorship tracking.
+
+---
+
+## 📣 Contributing
+
+Pull requests and suggestions are welcome! Please open an issue for major changes.
+
+---
+
+**Hare Krishna! May your service be successful!**
